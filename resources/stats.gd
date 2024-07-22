@@ -1,6 +1,6 @@
 class_name Stats extends Resource
 
-signal stats_change
+signal stats_changed
 
 @export var max_health: int = 1
 @export var art: Texture
@@ -8,11 +8,11 @@ signal stats_change
 var health: int:
 	set(value):
 		health = clampi(value, 0, max_health)
-		stats_change.emit()
+		stats_changed.emit()
 var block: int:
 	set(value):
 		block = clampi(value, 0, 999)
-		stats_change.emit()
+		stats_changed.emit()
 
 
 func take_damage(damage: int) -> void:
@@ -27,7 +27,7 @@ func take_damage(damage: int) -> void:
 
 func heal(amount: int) -> void:
 	self.health += amount
-	stats_change.emit()
+	stats_changed.emit()
 
 
 func create_instance() -> Resource:

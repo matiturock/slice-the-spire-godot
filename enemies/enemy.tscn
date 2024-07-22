@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5i3an616psjw"]
+
+[ext_resource type="Texture2D" uid="uid://1u3b3hwqd8yh" path="res://art/characters/enemies/tile_0110.png" id="1_jysu7"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_uy715"]
+[ext_resource type="Texture2D" uid="uid://bb3rcs5nqntir" path="res://art/ui/arrow.png" id="2_35h1n"]
+[ext_resource type="PackedScene" uid="uid://ds7krldeh3xck" path="res://scenes/ui/stats_ui.tscn" id="3_e7x8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_se2yg"]
+
+[sub_resource type="Animation" id="Animation_pdcfc"]
+resource_name = "arrow_floating"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -24), Vector2(0, -27.895)]
+}
+
+[sub_resource type="Animation" id="Animation_ok7fi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nd530"]
+_data = {
+"RESET": SubResource("Animation_ok7fi"),
+"arrow_floating": SubResource("Animation_pdcfc")
+}
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
+collision_layer = 4
+script = ExtResource("1_uy715")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_jysu7")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+rotation = 3.14159
+texture = ExtResource("2_35h1n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_se2yg")
+debug_color = Color(0, 0.6, 0.701961, 0.141176)
+
+[node name="StatsUI" parent="." instance=ExtResource("3_e7x8b")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nd530")
+}
+autoplay = "arrow_floating"

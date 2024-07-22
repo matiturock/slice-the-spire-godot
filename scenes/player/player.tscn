@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1qiwldglq4bd"]
+
+[ext_resource type="Texture2D" uid="uid://bue8imscpldys" path="res://art/characters/heroes/tile_0097.png" id="1_i2kf5"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_oac3n"]
+[ext_resource type="PackedScene" uid="uid://ds7krldeh3xck" path="res://scenes/ui/stats_ui.tscn" id="2_dcgdj"]
+
+[node name="Player" type="Node2D" groups=["player"]]
+script = ExtResource("1_oac3n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_i2kf5")
+
+[node name="StatsUI" parent="." instance=ExtResource("2_dcgdj")]
