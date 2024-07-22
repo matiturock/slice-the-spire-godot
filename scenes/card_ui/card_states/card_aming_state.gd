@@ -4,8 +4,6 @@ const MOUSE_Y_SNAPBACK_THRESHOLD: int = 138
 
 
 func enter() -> void:
-	card_ui.color.color = Color.WEB_PURPLE
-	card_ui.state.text = "AIMING"
 	card_ui.targets.clear()
 	
 	var offset: Vector2 = Vector2(
